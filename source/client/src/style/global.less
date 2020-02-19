@@ -1,0 +1,31 @@
+@import "./mixins.less";
+@import "./grid.layout.less";
+
+.notifications {
+    .fixed();
+    top    : 80%;
+    height : 20%;
+    margin : auto;
+    display: block;
+    width  : 100%;
+}
+
+.notification {
+    display              : grid;
+    width                : 300px;
+    height               : 60px;
+    grid-template-columns: repeat(3, 33%);
+    grid-template-rows   : auto 20px;
+    padding              : .25rem 1.25rem !important;
+    margin               : auto
+}
+
+input {
+    border-top-left-radius   : 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+label.input-group-text {
+    border-top-left-radius   : .25rem !important;
+    border-bottom-left-radius: .25rem !important;
+}

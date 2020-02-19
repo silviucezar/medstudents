@@ -1,0 +1,20 @@
+<!-- notifications - fixed;
+Header
+student - news
+secretara - tasks
+
+
+student
+profile,locale, procedures, applications, quick change, ,my favourites,send a message
+secretary
+profile,locale,Students, Approvals
+admin-->
+
+<app-header></app-header>
+<app-navbar></app-navbar>
+<div class='notifications'>
+  <app-notification class='notification alert alert-success'></app-notification>
+  <app-notification class='notification alert alert-danger'></app-notification>
+  <app-notification class='notification alert alert-warning'></app-notification>
+</div>
+<router-outlet style='display:none'></router-outlet>

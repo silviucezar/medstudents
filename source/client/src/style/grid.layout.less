@@ -1,0 +1,18 @@
+@import "./mixins.less";
+
+.app {
+    .fixed();
+    display              : grid;
+    grid-template-columns: 100%;
+    grid-template-rows   : 150px 50px auto;
+    left                 : 0;
+    height               : 100%;
+    top                  : 0;
+    background:#F4FAFF
+}
+
+@media (min-width:768px) {
+    .app {
+        grid-template-rows   : 275px 50px auto;
+    }
+}

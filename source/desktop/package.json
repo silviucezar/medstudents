@@ -1,0 +1,16 @@
+{
+  "name": "licenta",
+  "version": "0.1.0",
+  "main": "main.js",
+  "scripts": {
+    "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
+    "prestart": "npm run build",
+    "start:watch": "",
+    "build": "tsc",
+    "start": "electron .",
+    "electron-build": "cd.. && cd client && ng build && cd.. && cd server && npm run-script build && cd.. && cd desktop && npm run-script build && cd.. && cd.. && cd build/application && npm run-script package-win"
+  },
+  "dependencies": {
+    "electron": "^8.0.0"
+  }
+}
