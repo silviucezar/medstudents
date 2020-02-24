@@ -12,7 +12,6 @@ export class Token implements HttpInterceptor {
         Authorization : 'Bearer xx.yy.zz'
       }
     });
-    console.log('intercepted');
     return next.handle(tokenizedReq);
   }
 }

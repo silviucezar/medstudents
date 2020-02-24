@@ -1,22 +1,22 @@
 import Express, { Application, Request, Response, NextFunction } from 'express';
-import { ExpressRequestsHandler } from './c_appInit/a_serverInitialization';
+import { ExpressListener } from './c_appInit/a_serverInitialization';
 import { SecureContextOptions } from 'tls';
 import * as https from 'https';
 import * as http from 'http';
 import * as fs from 'fs';
 
-export class ExpressApp {
+class ExpressApp {
 
     static create() {
-        const appListenerStart = new ExpressRequestsHandler().startListening;
+        const listener = new ExpressListener();
         try {
             const config: SecureContextOptions = {
                 cert: fs.readFileSync((process.env.CERT!), 'utf8'),
                 key: fs.readFileSync((process.env.KEY!), 'utf8')
             };
-            https.createServer(config, appListenerStart());
+            https.createServer(config, listener.listen());
         } catch (e) {
-            http.createServer(appListenerStart());
+            http.createServer(listener.listen());
         }
     }
 }

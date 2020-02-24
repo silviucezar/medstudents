@@ -1,19 +1,19 @@
 import { RootController } from "../b_Controllers/a_RootController";
-import { LoginController } from "../b_Controllers/LoginController";
 import { ForgotPassController } from "../b_Controllers/ForgotPassController";
 
 export enum GetEnum {
     "/",
-    "/login",
-    "/change-pass"
+    "/change-pass",
+    "/test",
+    "/root"
 }
 
-export interface IRequestsControllers {
-    get:IGetControllers;
+export interface GetConfig {
+    controllers: GetControllers;
+    routes: string[];
 }
 
-export interface IGetControllers {
+export interface GetControllers {
     root: typeof RootController
-    login: typeof LoginController,
     forgotpass: typeof ForgotPassController
 }

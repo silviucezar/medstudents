@@ -12,6 +12,6 @@ import { AuthService } from './Modules/auth/auth.service'
 export class AppComponent {
   title = 'client';
   constructor(auth:AuthService) {
-    auth.init();
+    // auth.init();
   }
 }

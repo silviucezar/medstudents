@@ -1,18 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.less'],
-  host : {
-    style : 'background: #564E58'
+  host: {
+    style: 'background: #564E58;position:relative',
+    class: 'app-navbar'
   }
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  public displayDebug = false;
+
+    constructor() { }
 
   ngOnInit(): void {
   }
 
+  toggleDebug() {
+    this.displayDebug = !this.displayDebug;
+  }
 }

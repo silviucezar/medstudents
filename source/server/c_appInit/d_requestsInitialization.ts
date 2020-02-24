@@ -1,9 +1,10 @@
 import { Application, Request, Response } from "express";
-import { IRequestsControllers, IGetControllers, GetEnum } from "../d_Models/getModel";
 import { RootController } from "../b_Controllers/a_RootController";
 import { LoginController } from "../b_Controllers/LoginController";
 import { ForgotPassController } from "../b_Controllers/ForgotPassController";
-
+import { GetEnum, GetControllers } from "../d_Models/get.model.ts";
+import { PostEnum, PostControllers } from "../d_Models/post.model";
+import { RequestsControllers } from './../d_Models/request.controllers.model'
 
 interface IRequestHandlerFunctionality {
     listenToGetRequests(): void;
@@ -14,25 +15,36 @@ interface IRequestHandlerFunctionality {
 
 export class RequestsInitialization implements IRequestHandlerFunctionality {
 
-    private requestControllers: IRequestsControllers = {
+    private requestControllers: RequestsControllers = {
         get: {
-            root: RootController,
-            login: LoginController,
-            forgotpass: ForgotPassController
+            controllers: {
+                root: RootController,
+                forgotpass: ForgotPassController
+            },
+            routes: Object.keys(GetEnum)
+        },
+        post: {
+            controllers: {
+                login: LoginController
+            },
+            routes: Object.keys(PostEnum)
         }
-
     }
 
-
-    constructor(private app: Application) { }
+    constructor(protected app: Application) { }
 
     listenToGetRequests() {
-        const getRoutes = Object.keys(GetEnum);
-        this.app.get(getRoutes, (request: Request, response: Response) => this.requestControllers.get[request.url as keyof IGetControllers].run());
+        console.log(this.requestControllers.get.routes)
+        this.app.get(this.requestControllers.get.routes, (request: Request, response:Response) => {
+            this.requestControllers.get.controllers[request.url.replace("/", "") as keyof GetControllers].run(request, response);
+        });
     }
 
     listenToPostRequests() {
-
+        this.app.post(this.requestControllers.post.routes, (request: Request, response: Response) => {
+            console.log(this.requestControllers.post.routes)
+            this.requestControllers.post.controllers[request.url.replace("/", "") as keyof PostControllers].run(request, response);
+        });
     }
 
     listenToPutRequests() { };

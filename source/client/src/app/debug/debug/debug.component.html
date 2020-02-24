@@ -1,0 +1,17 @@
+<select [(ngModel)]='debug'>
+    <option disabled selected value=''>Select Debug Option</option>
+    <optgroup label='Http Requests'>
+        <option value='Get'>GET Request</option>
+        <option value='Post'>POST Request</option>
+        <option value='Put'>PUT Request</option>
+        <option value='Delete'>DELETE Request</option>
+    </optgroup>
+    <optgroup label='Database'>
+        <option value='CreateTables'>Create Tables</option>
+        <option value='DeleteTables'>Delete Tables</option>
+    </optgroup>
+</select>
+<div style='position:absolute;margin-left:20px; display: inline-block' *ngIf='debug !== ""'>
+    <input [(ngModel)]='config.url' type='text' /><br>
+    <button (click)='doRequest()'>Do {{debug}} Request</button>
+</div>
