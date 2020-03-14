@@ -1,6 +1,9 @@
-import { HttpParams } from '@angular/common/http';
-
 export interface GetConfig {
     url:string;
-    querystrings: HttpParams | undefined
+    querystrings?: any | undefined
+}
+
+export interface PostConfig {
+    url:string;
+    body?: any | undefined
 }

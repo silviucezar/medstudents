@@ -1,0 +1,1 @@
+export const userType = ['Student','Secretary','Admin'];

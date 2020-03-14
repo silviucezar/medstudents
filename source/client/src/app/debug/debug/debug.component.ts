@@ -20,10 +20,6 @@ export class DebugComponent implements OnInit {
   ngOnInit(): void { }
 
   doRequest() {
-    const body = new URLSearchParams();
-    body.set("user","user");
-    body.set("pass","pass");
     this.http.post<any>(this.config as unknown as GetConfig).then(response => console.log(response));
   }
-
 }

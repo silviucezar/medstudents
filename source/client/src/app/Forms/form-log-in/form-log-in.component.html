@@ -1,12 +1,12 @@
-<form class="input-group flex-nowrap login">
+<form class="input-group flex-nowrap login" #loginForm='ngForm'>
     <div class="input-group-prepend">
         <label class="input-group-text">Email</label>
-        <input type="text" class="form-control" aria-label="Username" aria-describedby="addon-wrapping">
+        <input ngModel name="username" type="text" class="form-control" aria-label="Username" aria-describedby="addon-wrapping" required>
     </div>
     <div class="input-group-prepend">
         <label class="input-group-text">Password</label>
-        <input type="text" class="form-control" aria-label="Username" aria-describedby="addon-wrapping">
+        <input ngModel name="password" type="text" class="form-control" aria-label="Username" aria-describedby="addon-wrapping" required>
     </div>
-    <button class='btn btn-primary'>Log In</button>
+    <button class='btn btn-primary' (click)='login(loginForm.form.value)'>Log In</button>
     <a routerLink='/forgot-pass' class='btn btn-secondary'>Forgot Password</a>
 </form>

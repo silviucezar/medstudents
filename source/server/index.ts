@@ -1,4 +1,3 @@
-import Express, { Application, Request, Response, NextFunction } from 'express';
 import { ExpressListener } from './c_appInit/a_serverInitialization';
 import { SecureContextOptions } from 'tls';
 import * as https from 'https';

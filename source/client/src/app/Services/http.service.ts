@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { GetConfig } from '../Interfaces/request.params';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { GetConfig, PostConfig } from '../Interfaces/request.params';
 
 interface IHttpService {
   get: <T>(config: GetConfig) => Promise<any>;
@@ -21,10 +21,23 @@ export class HttpService implements IHttpService {
 
   public get = <T>(config: GetConfig): Promise<any> => this.http.get(`http://localhost:8080${config.url}`, { params: config.querystrings }).toPromise();
 
-  public post = <T>(config: GetConfig): Promise<any> => this.http.post(`http://localhost:8080${config.url}`, { user: 'user', pass: 'pass' }).toPromise();
+  public post = <T>(config: PostConfig): Promise<any> => {
+    const headers = new HttpHeaders().set("Content-Type", "application/x-www-form-urlencoded");
+    console.log(`http://localhost:8080/${config.url}`)
+    return this.http.post(`http://localhost:8080/${config.url}`, this.encodeUrl(config.body), { headers }).toPromise();
+  };
 
   // public put = <T>(config:Config): Promise<any> => this.http.put<T>(url, queryParams).toPromise();
 
   // public delete = <T>(config:Config): Promise<any> => this.http.delete<T>(url, queryParams).toPromise();
 
+  private encodeUrl(body: any): string {
+    console.log(body)
+    let query = '';
+    let keys = Object.keys(body);
+    keys.forEach((key, index) => {
+      query += `${key}=${body[key]}${index !== keys.length - 1 ? '&' : ''}`;
+    });
+    return query;
+  }
 }
