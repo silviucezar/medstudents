@@ -18,7 +18,6 @@ export class FormLogInComponent implements OnInit {
   }
 
   login(credentials:any) {
-    console.log(credentials)
     this.auth.login(credentials)
   }
 }

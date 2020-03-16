@@ -1,1 +1,1 @@
-export const userType = ['Student','Secretary','Admin'];
+export const userType = ['student','secretary','admin'];

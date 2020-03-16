@@ -22,9 +22,14 @@ export class AuthService {
   ) { }
 
   login(credentials?: UserCredentials) {
-    this.http.post<SessionDetails>({ url: 'login', body: credentials || { username: localStorage.getItem('username') || 'Guest' } }).then(sessionDetails => {
+    this.http.post<SessionDetails>({ url: 'login', body: credentials || { email: localStorage.getItem('email') || 'Guest' } }).then(sessionDetails => {
       sessionDetails.status === 'success' ? this.$session.next(new Session(sessionDetails)) : this.failedAuth(sessionDetails.message);
-      this.r.navigate([`${userType[sessionDetails.userType] || 'login'}`]);
+      try {
+        localStorage.setItem('token',sessionDetails.token);
+      } finally {
+        console.log('here')
+        this.r.navigate([`${userType[sessionDetails.data.permission] || 'login'}`]);
+      }
     });
   }
 

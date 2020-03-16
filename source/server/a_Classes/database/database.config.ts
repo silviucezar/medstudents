@@ -3,11 +3,9 @@ import * as fs from 'fs';
 
 export class DatabaseConnection {
 
-    public readonly pool: Pool = createPool(this.poolConfiguration);
-
-    constructor() { }
-
-    private get poolConfiguration(): PoolConfig {
+    private static get poolConfiguration(): PoolConfig {
         return JSON.parse(process.env.POOLCONFIG?.toString() || fs.readFileSync(`${__dirname}\\dbconfig.json`).toString());
     }
+
+    public static readonly  pool: Pool = createPool(DatabaseConnection.poolConfiguration);
 }

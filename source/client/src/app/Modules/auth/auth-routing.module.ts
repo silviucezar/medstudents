@@ -13,8 +13,7 @@ const routes: Routes = [{
   {
     path: 'forgot-pass',
     component: FormForgotPassComponent
-  }
-  ]
+  }]
 }];
 
 @NgModule({

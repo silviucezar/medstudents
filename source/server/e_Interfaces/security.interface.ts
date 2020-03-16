@@ -1,7 +1,7 @@
 import { TokenizedRequest } from "./tokenized.request.interface";
 import { Response, NextFunction } from "express";
 
-export interface IShield {
+export interface ISecurity {
     generateRequestToken: (username: string) => string
     verifyRequestToken: (token: string) => string;
     verifyTokenMiddleware: (request: TokenizedRequest, response: Response, next: NextFunction) => string;

@@ -12,8 +12,7 @@ import { CarouselComponent } from './shared/carousel/carousel.component';
 import { HeaderComponent } from './header/header.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
-import { Token } from './Modules/auth/Token';
-import { DebugComponent } from './debug/debug/debug.component'
+import { DebugComponent } from './debug/debug/debug.component';
 
 @NgModule({
   declarations: [

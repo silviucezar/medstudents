@@ -7,7 +7,7 @@ import { PostEnum, PostControllers } from "../d_Models/post.model";
 import { RequestsControllers } from './../d_Models/request.controllers.model'
 import * as JSONWebToken from 'jsonwebtoken';
 import { TokenizedRequest } from "../e_Interfaces/tokenized.request.interface";
-import { Shield } from "../a_Classes/security/shield";
+import { Security } from "../a_Classes/security/security";
 
 interface IRequestHandlerFunctionality {
     listenToGetRequests(): void;
@@ -18,7 +18,7 @@ interface IRequestHandlerFunctionality {
 
 export class RequestsInitialization implements IRequestHandlerFunctionality {
 
-    private shield = new Shield();
+    private security = new Security();
 
     private requestControllers: RequestsControllers = {
         get: {
@@ -51,12 +51,12 @@ export class RequestsInitialization implements IRequestHandlerFunctionality {
                     response.json({ loggedOut: true });
                     break;
                 case request.body.username !== 'Guest' && request.url === '/login':
-                    const token = this.shield.generateRequestToken(request.body.username);
+                    const token = this.security.generateRequestToken(request.body.username);
                     this.requestControllers.post.controllers[request.url.replace("/", "") as keyof PostControllers].run(request, response, token);
                     break;
                 default:
                     try {
-                        const _token = this.shield.verifyRequestToken(request.token as string);
+                        const _token = this.security.verifyRequestToken(request.token as string);
                         console.log(_token)
                         this.requestControllers.post.controllers[request.url.replace("/", "") as keyof PostControllers].run(request, response);
                     } finally {

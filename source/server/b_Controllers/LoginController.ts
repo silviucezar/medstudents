@@ -2,33 +2,30 @@ import { Response } from "express";
 
 import { TokenizedRequest } from "../e_Interfaces/tokenized.request.interface";
 import { DatabaseConnection } from '../a_Classes/database/database.config';
-import { Shield } from '../a_Classes/security/shield'
+import { Security } from '../a_Classes/security/security'
 
 
 export class LoginController {
 
-    constructor() { }
+    static async run(request: TokenizedRequest, response: Response, token?: string) {
 
-    static run(request: TokenizedRequest, response: Response, token?: string) {
-
-        const dbPool = new DatabaseConnection().pool;
-
-        const passDetails:PassDetails = {
-            Shield.password(request.body.password),
-            pepper : Shield.trigger("PEPPER");
-        }
-        console.log('pass',Shield.password(request.body.password));
-
-        const sanitizedQuery = [request.body.username,request.body.password]
-        dbPool.query(`SELECT * FROM users WHERE username=? AND pwd=SELECT(SHA256(?))`, sanitizedQuery, (err, data) => {
+        const dbPool = DatabaseConnection.pool;
+        const salt = await Security.getSalt(request.body.email);
+        const pepper = Security.getPrivateKey("PEPPER");
+        const password = Security.hash(request.body.password + salt + pepper);
+        console.log(password)
+        const sanitizedQuery = [request.body.email, password]
+        dbPool.query(`SELECT * FROM users WHERE email=? AND pwd=?`, sanitizedQuery, (err, data) => {
             if (err) {
                 console.log(err)
             } else {
                 console.log(data)
+                response.json({
+                    status: "success",
+                    data: data[0],
+                    token
+                });
             }
         });
-        console.log(request.token)
-        console.log('token',token)
-        response.end(JSON.stringify({ status: 'success' }));
     }
 }

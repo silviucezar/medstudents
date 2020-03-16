@@ -1,7 +1,7 @@
 import Express, { Application } from "express";
 import { DeployedApplication } from './c_deployedApplication'
 import { ServedApplication } from './b_servedApplication'
-import { Shield } from '../a_Classes/security/shield';
+import { Security } from '../a_Classes/security/security';
 import * as bodyParser from 'body-parser';
 import session from 'express-session';
 
@@ -29,7 +29,7 @@ export class ExpressListener implements IExpressListener {
     listen(): Application {
         this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(session({
-            secret: Shield.trigger('SESSION'),
+            secret: Security.getPrivateKey('SESSION'),
             resave: true,
             saveUninitialized: false,
             cookie: {
