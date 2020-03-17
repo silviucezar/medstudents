@@ -22,7 +22,8 @@ export class AuthService {
   ) { }
 
   login(credentials?: UserCredentials) {
-    this.http.post<SessionDetails>({ url: 'login', body: credentials || { email: localStorage.getItem('email') || 'Guest' } }).then(sessionDetails => {
+
+    this.http.post<SessionDetails>({ url: credentials?.path || 'guest-visit', body: credentials || { email: localStorage.getItem('email') || 'Guest' } }).then(sessionDetails => {
       sessionDetails.status === 'success' ? this.$session.next(new Session(sessionDetails)) : this.failedAuth(sessionDetails.message);
       try {
         localStorage.setItem('token',sessionDetails.token);

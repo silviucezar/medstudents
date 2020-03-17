@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SecretaryRoutingModule } from './secretary-routing.module';
-import { SecretaryComponent } from './components/secretary.component';
+import { SecretaryComponent } from './components/home/secretary.component';
 
 
 @NgModule({

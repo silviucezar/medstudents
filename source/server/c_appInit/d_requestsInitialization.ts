@@ -2,10 +2,9 @@ import { Application, Response, NextFunction } from "express";
 import { RootController } from "../b_Controllers/a_RootController";
 import { LoginController } from "../b_Controllers/LoginController";
 import { ForgotPassController } from "../b_Controllers/ForgotPassController";
-import { GetEnum, GetControllers } from "../d_Models/get.model.ts";
-import { PostEnum, PostControllers } from "../d_Models/post.model";
+import { GetControllers, GetRoutes } from "../d_Models/get.model";
+import { PostControllers, PostRoutes } from "../d_Models/post.model";
 import { RequestsControllers } from './../d_Models/request.controllers.model'
-import * as JSONWebToken from 'jsonwebtoken';
 import { TokenizedRequest } from "../e_Interfaces/tokenized.request.interface";
 import { Security } from "../a_Classes/security/security";
 
@@ -26,13 +25,13 @@ export class RequestsInitialization implements IRequestHandlerFunctionality {
                 root: RootController,
                 forgotpass: ForgotPassController
             },
-            routes: Object.keys(GetEnum)
+            routes: GetRoutes
         },
         post: {
             controllers: {
                 login: LoginController
             },
-            routes: Object.keys(PostEnum)
+            routes: PostRoutes
         }
     }
 

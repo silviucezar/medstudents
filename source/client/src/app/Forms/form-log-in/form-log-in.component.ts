@@ -10,14 +10,15 @@ import { AuthService } from 'src/app/Modules/auth/auth.service';
 export class FormLogInComponent implements OnInit {
 
   constructor(
-    private http:HttpService,
-    private auth:AuthService
+    private http: HttpService,
+    private auth: AuthService
   ) { }
 
   ngOnInit(): void {
   }
 
-  login(credentials:any) {
+  login(credentials: any) {
+    Object.defineProperty(credentials, "path", { value: 'login' });
     this.auth.login(credentials)
   }
 }
