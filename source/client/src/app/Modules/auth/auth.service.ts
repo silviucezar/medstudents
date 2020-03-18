@@ -21,20 +21,23 @@ export class AuthService {
     private http: HttpService
   ) { }
 
-  login(credentials?: UserCredentials) {
-
-    this.http.post<SessionDetails>({ url: credentials?.path || 'guest-visit', body: credentials || { email: localStorage.getItem('email') || 'Guest' } }).then(sessionDetails => {
-      sessionDetails.status === 'success' ? this.$session.next(new Session(sessionDetails)) : this.failedAuth(sessionDetails.message);
-      try {
-        localStorage.setItem('token',sessionDetails.token);
-      } finally {
-        console.log('here')
-        this.r.navigate([`${userType[sessionDetails.data.permission] || 'login'}`]);
-      }
-    });
+  attemptLogin(credentials?: UserCredentials) {
+    console.log('her')
+    if (localStorage.getItem('userid') || credentials) {
+      this.http.post<SessionDetails>({ url: credentials!.path, body: credentials || { userid: localStorage.getItem('userid') } })
+        .then(sessionDetails => {
+          sessionDetails.status === 'success' ? this.$session.next(new Session(sessionDetails.data)) : this.failedAuth(sessionDetails.message);
+          console.log(sessionDetails)
+          localStorage.setItem('token', sessionDetails.data.token);
+          localStorage.setItem('userid', sessionDetails.data.userid);
+          this.r.navigate([userType[sessionDetails.data.permission]]);
+        });
+    } else {
+      this.r.navigate(['login']);
+    }
   }
 
-  failedAuth(message: string) {
+  private failedAuth(message: string) {
 
   }
 }

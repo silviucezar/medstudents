@@ -1,6 +1,6 @@
 import { Application, NextFunction, Response } from "express";
 import { RequestsInitialization } from "./d_requestsInitialization";
-import { TokenizedRequest } from "../e_Interfaces/tokenized.request.interface";
+import { TokenizedRequest } from "../e_Interfaces/Security/tokenized.request.interface";
 
 export class ServedApplication extends RequestsInitialization {
     constructor(app: Application) {

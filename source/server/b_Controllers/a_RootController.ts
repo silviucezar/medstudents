@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { TokenizedRequest } from "../e_Interfaces/tokenized.request.interface";
+import { TokenizedRequest } from "../e_Interfaces/Security/tokenized.request.interface";
 
 export class RootController {
     constructor() { }

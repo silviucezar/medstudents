@@ -1,5 +1,5 @@
-import { RootController } from "../b_Controllers/a_RootController";
-import { ForgotPassController } from "../b_Controllers/ForgotPassController";
+import { RootController } from "../../b_Controllers/a_RootController";
+import { ForgotPassController } from "../../b_Controllers/ForgotPassController";
 
 export const GetRoutes = [
     "/",

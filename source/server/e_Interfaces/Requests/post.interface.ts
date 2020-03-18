@@ -1,4 +1,4 @@
-import { LoginController } from "../b_Controllers/LoginController";
+import { LoginController } from "../../b_Controllers/LoginController";
 
 export const PostRoutes = ['/login','/guest-visit'];
 

@@ -19,6 +19,6 @@ export class FormLogInComponent implements OnInit {
 
   login(credentials: any) {
     Object.defineProperty(credentials, "path", { value: 'login' });
-    this.auth.login(credentials)
+    this.auth.attemptLogin(credentials)
   }
 }

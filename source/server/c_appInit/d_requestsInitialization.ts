@@ -2,10 +2,10 @@ import { Application, Response, NextFunction } from "express";
 import { RootController } from "../b_Controllers/a_RootController";
 import { LoginController } from "../b_Controllers/LoginController";
 import { ForgotPassController } from "../b_Controllers/ForgotPassController";
-import { GetControllers, GetRoutes } from "../d_Models/get.model";
-import { PostControllers, PostRoutes } from "../d_Models/post.model";
-import { RequestsControllers } from './../d_Models/request.controllers.model'
-import { TokenizedRequest } from "../e_Interfaces/tokenized.request.interface";
+import { GetControllers, GetRoutes } from "../e_Interfaces/Requests/get.interface";
+import { PostControllers, PostRoutes } from "../e_Interfaces/Requests/post.interface";
+import { RequestsControllers } from '../e_Interfaces/Requests/request.controllers.interface'
+import { TokenizedRequest } from "../e_Interfaces/Security/tokenized.request.interface";
 import { Security } from "../a_Classes/security/security";
 
 interface IRequestHandlerFunctionality {
