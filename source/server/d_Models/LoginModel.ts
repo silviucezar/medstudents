@@ -1,34 +1,25 @@
 import { DatabaseConnection } from '../a_Classes/database/database.config';
-import { Security } from '../a_Classes/security/security'
+import { Security } from '../a_Classes/security/security';
 
 export class LoginModel {
 
-    login(bodyRequest: any) {
+    constructor(private body:any) {
+
+    }
+
+    login(loginParams: LoginParams) {
+
 
         withPass = 
 
     }
 
-    private getSalt(email: string): Promise<string> {
-        return new Promise((resolve, reject) => {
-            DatabaseConnection.pool.query(`SELECT salt from salts WHERE email=?`, [email], (error, data) => {
-                if (error) reject(error); else resolve(data[0].salt);
-            });
-        });
+
+    loginWith() {
+
     }
 
-    private setSalt(email: string): Promise<any> {
-        return new Promise((resolve, reject) => {
-            function insertSalt() {
-                DatabaseConnection.pool.query(`INSERT INTO salts (salt,email) VALUES (?,?)`, [Security.randomKey, email], (error, data) => {
-                    if (error) reject(error); else resolve(data);
-                });
-            }
-            try { insertSalt(); } catch (e) { insertSalt(); }
-        });
-    }
-
-    private withPass() {
+    private pass() {
         const dbPool = DatabaseConnection.pool;
         const salt = await this.getSalt(bodyRequest.identificationKey);
         const pepper = Security.getPrivateKey("PEPPER");
@@ -50,7 +41,7 @@ export class LoginModel {
         });
     }
 
-    private withId() {
+    private id() {
 
     }
 }

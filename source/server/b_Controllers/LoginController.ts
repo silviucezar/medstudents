@@ -8,7 +8,11 @@ import { LoginModel } from "../d_Models/LoginModel";
 export class LoginController {
 
     static async run(request: TokenizedRequest, response: Response, token?: string) {
-        const model = new LoginModel(request.body);
+        const loginParams:LoginParams = request.body;
+        Object.defineProperty(loginParams,"loginType",{
+            value : loginParams.hasOwnProperty("userid") ? "id" : "pass"
+        });
+        const model = new LoginModel(request.body)
         const jsonToSend = await model.login();
         response.json(jsonToSend);
     }

@@ -31,7 +31,7 @@ export class Security implements ISecurity {
         return process.env[type] || fs.readFileSync(`${__dirname}\\${type}.txt`).toString();
     }
 
-    private static get randomKey(): string {
+    static get randomKey(): string {
         return crypto.randomBytes(20).toString('hex');
     }
 }
