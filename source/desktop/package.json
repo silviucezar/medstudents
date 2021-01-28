@@ -11,6 +11,6 @@
     "electron-build": "cd.. && cd client && ng build && cd.. && cd server && npm run-script build && cd.. && cd desktop && npm run-script build && cd.. && cd.. && cd build/application && npm run-script package-win"
   },
   "dependencies": {
-    "electron": "^8.0.0"
+    "electron": "^9.4.0"
   }
 }
